@@ -6,7 +6,7 @@
 import Link from "next/link";
 import { getAllSlug } from "@/src/libs/get-all-slug";
 import type { GetStaticProps, NextPage } from "next";
-
+import Image from 'next-export-optimize-images/image'
 
 
 // const geistSans = localFont({
@@ -37,6 +37,14 @@ const Home: NextPage<HomeProps> = ({ slugs }) => {
           );
         })}
       </ul>
+      <Image
+        className="logo"
+        src="/next.svg"
+        alt="Next.js logo"
+        width={180}
+        height={38}
+        priority
+      />
     </div>
   );
 };
