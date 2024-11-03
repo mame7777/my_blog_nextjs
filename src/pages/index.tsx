@@ -6,7 +6,7 @@
 import Link from "next/link";
 import { getAllSlug } from "@/src/libs/get-all-slug";
 import type { GetStaticProps, NextPage } from "next";
-import Image from 'next-export-optimize-images/image'
+import Image from 'next-export-optimize-images/picture'
 
 
 // const geistSans = localFont({
