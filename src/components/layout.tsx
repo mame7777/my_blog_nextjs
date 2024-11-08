@@ -1,5 +1,10 @@
 import { ReactNode } from 'react';
 
+// Bootstrap
+// import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 const Layout = ({ children }: { children: ReactNode }) => {
     return (
     <div>

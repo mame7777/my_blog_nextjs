@@ -4,12 +4,13 @@
 // import styles from "@/src/styles/Home.module.css";
 
 import Link from "next/link";
-import { getAllSlug } from "@libs/get-all-slug";
-import type { GetStaticProps, NextPage } from "next";
-import Image from 'next-export-optimize-images/picture'
+// import { getAllSlug } from "@libs/get-all-slug";
+// import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
+// import Image from 'next-export-optimize-images/picture'
 
 import Layout from '@com/layout';
-import PostCard from '@com/postCard';
+//import PostCard from '@com/postCard';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -22,8 +23,22 @@ import PostCard from '@com/postCard';
 //   weight: "100 900",
 // });
 
+type PostData = {
+  id: string;
+  title: string;
+  summary: string;
+  date: string;
+  slug: string;
+  hero_image: string;
+}
 
-const IndexPage = ({ data }) => {
+type IndexPageProps = {
+  postData: PostData[];
+};
+
+
+const IndexPage: NextPage<IndexPageProps> = ({ postData }) => {
+  console.log(postData);
   return (
     <Layout>
       <h1>mame77のブログへようこそ!</h1>
@@ -31,6 +46,9 @@ const IndexPage = ({ data }) => {
       <h2 className="mt-5">新規投稿</h2>
       {/* {data.allMarkdownRemark.edges.map((edge) => (
         <PostCard post={edge.node} key={edge.node.id}/>
+      ))} */}
+      {/* {postData.map((post: PostData) => (
+        <PostCard post={post} key={post.id}/>
       ))} */}
       <div className="text-center">
         <Link href="/all-post" className="btn btn-primary">もっと見る</Link>
@@ -70,13 +88,13 @@ const IndexPage = ({ data }) => {
 //   );
 // };
 
-export const getStaticProps: GetStaticProps<HomeProps> = () => {
-  return {
-    props: {
-      slugs: getAllSlug("contents/posts"),
-    },
-  };
-};
+// export const getStaticProps: GetStaticProps<HomeProps> = () => {
+//   return {
+//     props: {
+//       slugs: getAllSlug("contents/posts"),
+//     },
+//   };
+// };
 
 export default IndexPage;
 // export default function Home() {
