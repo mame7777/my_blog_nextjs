@@ -4,10 +4,12 @@
 // import styles from "@/src/styles/Home.module.css";
 
 import Link from "next/link";
-import { getAllSlug } from "@/src/libs/get-all-slug";
+import { getAllSlug } from "@libs/get-all-slug";
 import type { GetStaticProps, NextPage } from "next";
 import Image from 'next-export-optimize-images/picture'
 
+import Layout from '@com/layout';
+import PostCard from '@com/postCard';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -20,34 +22,53 @@ import Image from 'next-export-optimize-images/picture'
 //   weight: "100 900",
 // });
 
-type HomeProps = {
-  slugs: string[];
-};
 
-const Home: NextPage<HomeProps> = ({ slugs }) => {
+const IndexPage = ({ data }) => {
   return (
-    <div className="container">
-      <h1>記事一覧</h1>
-      <ul>
-        {slugs.map((slug, i) => {
-          return (
-            <li key={i}>
-              <Link href={`/posts/${slug}`}>{slug}</Link>
-            </li>
-          );
-        })}
-      </ul>
-      <Image
-        className="logo"
-        src="/next.svg"
-        alt="Next.js logo"
-        width={180}
-        height={38}
-        priority
-      />
-    </div>
+    <Layout>
+      <h1>mame77のブログへようこそ!</h1>
+
+      <h2 className="mt-5">新規投稿</h2>
+      {/* {data.allMarkdownRemark.edges.map((edge) => (
+        <PostCard post={edge.node} key={edge.node.id}/>
+      ))} */}
+      <div className="text-center">
+        <Link href="/all-post" className="btn btn-primary">もっと見る</Link>
+      </div>
+      <h2>お知らせ</h2>
+      <p>旧ブログシステムが故障したため，新規構築中です！</p>
+    </Layout>
   );
-};
+}
+
+// type HomeProps = {
+//   slugs: string[];
+// };
+
+// const Home: NextPage<HomeProps> = ({ slugs }) => {
+//   return (
+//     <div className="container">
+//       <h1>記事一覧</h1>
+//       <ul>
+//         {slugs.map((slug, i) => {
+//           return (
+//             <li key={i}>
+//               <Link href={`/posts/${slug}`}>{slug}</Link>
+//             </li>
+//           );
+//         })}
+//       </ul>
+//       <Image
+//         className="logo"
+//         src="/next.svg"
+//         alt="Next.js logo"
+//         width={180}
+//         height={38}
+//         priority
+//       />
+//     </div>
+//   );
+// };
 
 export const getStaticProps: GetStaticProps<HomeProps> = () => {
   return {
@@ -57,7 +78,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = () => {
   };
 };
 
-export default Home;
+export default IndexPage;
 // export default function Home() {
 //   return (
 //     <>
