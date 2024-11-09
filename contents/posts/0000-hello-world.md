@@ -5,6 +5,7 @@ description: '本ブログ初めての投稿です！気ままに更新してい
 date: '2023-08-15'
 slug: '0000-hello-world'
 hero_image: '../../images/posts/0000/mame77-logo.png'
+id: '0000'
 ---
 
 ## やぁ！  

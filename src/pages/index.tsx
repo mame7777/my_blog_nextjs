@@ -9,6 +9,7 @@ import Link from "next/link";
 import type { NextPage } from "next";
 // import Image from 'next-export-optimize-images/picture'
 
+import type { MarkdownFrontMatter } from '@src/pages/posts/[slug]';
 import Layout from '@com/layout';
 //import PostCard from '@com/postCard';
 
@@ -23,17 +24,9 @@ import Layout from '@com/layout';
 //   weight: "100 900",
 // });
 
-type PostData = {
-  id: string;
-  title: string;
-  summary: string;
-  date: string;
-  slug: string;
-  hero_image: string;
-}
 
 type IndexPageProps = {
-  postData: PostData[];
+  postData: MarkdownFrontMatter[];
 };
 
 
