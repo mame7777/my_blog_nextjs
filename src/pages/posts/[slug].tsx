@@ -2,10 +2,15 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 import fs from "fs";
 import matter from "gray-matter";
+import Image from 'next-export-optimize-images/picture'
 
 import { getAllSlug } from "@src/libs/get-all-slug";
 import { getMarkdown } from "@src/libs/get-markdown";
 import { markdownToHtml } from "@src/libs/markdown-to-html";
+
+import Layout from '@com/layout';
+
+import styles from "@/src/styles/posts.css";
 
 type BlogDetailPageProps = {
   htmlContent: string;
@@ -25,7 +30,17 @@ export type MarkdownFrontMatter = {
 
 const BlogDetailPage: NextPage<BlogDetailPageProps> = ({ htmlContent, mdFrontMatter }) => {
   console.log(mdFrontMatter);
-  return <div className="container" dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+  return (
+    <Layout>
+    <h1 className='h1'>{mdFrontMatter.title}</h1>
+    <div>投稿日：{mdFrontMatter.date}</div>
+    <div className="text-center">
+      <Image  src={mdFrontMatter.hero_image} alt="Hero Image" width={180} height={20}/>
+
+    </div>
+    <div className="container" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+    </Layout>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
