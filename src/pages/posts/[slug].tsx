@@ -10,8 +10,6 @@ import { markdownToHtml } from "@src/libs/markdown-to-html";
 
 import Layout from '@com/layout';
 
-import styles from "@/src/styles/posts.css";
-
 type BlogDetailPageProps = {
   htmlContent: string;
   mdFrontMatter: MarkdownFrontMatter;
