@@ -27,14 +27,12 @@ export type MarkdownFrontMatter = {
 };
 
 const BlogDetailPage: NextPage<BlogDetailPageProps> = ({ htmlContent, mdFrontMatter }) => {
-  console.log(mdFrontMatter);
   return (
     <Layout>
     <h1 className='h1'>{mdFrontMatter.title}</h1>
     <div>投稿日：{mdFrontMatter.date}</div>
     <div className="text-center">
       <Image  src={mdFrontMatter.hero_image} alt="Hero Image" width={180} height={20}/>
-
     </div>
     <div className="container" dangerouslySetInnerHTML={{ __html: htmlContent }} />
     </Layout>

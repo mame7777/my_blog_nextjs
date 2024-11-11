@@ -5,13 +5,17 @@
 
 import Link from "next/link";
 // import { getAllSlug } from "@libs/get-all-slug";
-// import type { GetStaticProps, NextPage } from "next";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
+import fs from "fs";
+import matter from "gray-matter";
 // import Image from 'next-export-optimize-images/picture'
 
 import type { MarkdownFrontMatter } from '@src/pages/posts/[slug]';
+import { getAllSlug } from '@libs/get-all-slug';
+
 import Layout from '@com/layout';
-//import PostCard from '@com/postCard';
+import PostCard from '@com/postCard';
+import type { PostCardProps } from '@com/postCard';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -31,7 +35,9 @@ type IndexPageProps = {
 
 
 const IndexPage: NextPage<IndexPageProps> = ({ postData }) => {
+  console.log("IndexPage");
   console.log(postData);
+  console.log("End IndexPage");
   return (
     <Layout>
       <h1>mame77のブログへようこそ!</h1>
@@ -43,6 +49,18 @@ const IndexPage: NextPage<IndexPageProps> = ({ postData }) => {
       {/* {postData.map((post: PostData) => (
         <PostCard post={post} key={post.id}/>
       ))} */}
+      {postData.map((post: MarkdownFrontMatter) => {
+        const postCardProps: PostCardProps = {
+          id: post.id,
+          title: post.title,
+          summary: post.summary,
+          date: post.date,
+          slug: post.slug,
+          hero_image: post.hero_image,
+        };
+        return (<PostCard post={postCardProps} key={post.id}/>);
+      })}
+      
       <div className="text-center">
         <Link href="/all-post" className="btn btn-primary">もっと見る</Link>
       </div>
@@ -52,9 +70,20 @@ const IndexPage: NextPage<IndexPageProps> = ({ postData }) => {
   );
 }
 
-// type HomeProps = {
-//   slugs: string[];
-// };
+export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
+  const slugs = getAllSlug("contents/posts");
+  const postData: MarkdownFrontMatter[] = slugs.map(slug => {
+    const markdown = fs.readFileSync(`contents/posts/${slug}.md`, 'utf-8');
+    const { data: frontMatter} = matter(markdown);
+    return frontMatter as MarkdownFrontMatter;
+  });
+
+  return {
+    props: {
+      postData,
+    },
+  };
+}
 
 // const Home: NextPage<HomeProps> = ({ slugs }) => {
 //   return (
